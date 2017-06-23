@@ -4,35 +4,32 @@ var prefix = "https://cors-anywhere.herokuapp.com/";
 
 function getQuote() {
 	$.ajaxSetup({ cache: false });
-    $.getJSON(prefix + quoteUrl, createTweet);
+	$.getJSON(prefix + quoteUrl, createTweet);
 }
 
 function createTweet(input) {
-    var data = input[0];
+	var data = input[0];
+	var quoteText = $(data.content).text().trim();
+	var quoteAuthor = data.title;
 
-    var quoteText = $(data.content).text().trim();
-    var quoteAuthor = data.title;
-
-    if (!quoteAuthor.length) {
-        quoteAuthor = "Unknown author";
-    }
+	if (!quoteAuthor.length) {
+		quoteAuthor = "Unknown author";
+	}
 
 	var tweetText = "Quote of the day - " + quoteText + " Author: " + quoteAuthor;
 
 	if (tweetText.length > 140) {
-    	getQuote();
+		getQuote();
 	} else {
-    	var tweet = tweetLink + encodeURIComponent(tweetText);
-    	$('.quote').text(quoteText);
-    	$('.author').text("Author: " + quoteAuthor);
-    	$('.tweet').attr('href', tweet);
+		var tweet = tweetLink + encodeURIComponent(tweetText);
+		$('.quote').text(quoteText);
+		$('.author').text("Author: " + quoteAuthor);
+		$('.tweet').attr('href', tweet);
 	}
-
-
 }
 $(document).ready(function() {
-    getQuote();
-    $('.trigger').click(function() {
-        getQuote();
-    })
+	getQuote();
+	$('.trigger').click(function() {
+		getQuote();
+	});
 });
