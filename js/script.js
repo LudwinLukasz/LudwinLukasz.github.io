@@ -8,7 +8,6 @@ function getQuote() {
 }
 
 function createTweet(input) {
-	input = [];
 	if(input.length) {
 	var data = input[0];
 	var quoteText = $(data.content).text().trim();
@@ -28,7 +27,7 @@ function createTweet(input) {
 		$('.author').text("Author: " + quoteAuthor);
 		$('.tweet').attr('href', tweet);
 	} 
-} else {$('.quote').text("cos nie tak")}
+} else {$('.quote').text("no quote available")}
 }
 $(document).ready(function() {
 	getQuote();
